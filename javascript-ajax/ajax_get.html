@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ajax</title>
+</head>
+<body>
+    用户:<input type="text" id="user">
+    密码:<input type="text" id="pass">
+    <input type="button" value="提交" id="btn">
+    <script>
+        btn.onclick = function(){
+            ajax(user.value,pass.value);
+        }
+function ajax(user,pass){
+    var XHR = new XMLHttpRequest();
+    XHR.open("get","http://localhost:8888/index.php?name="+user+"&pass="+pass,true);
+    XHR.send();
+    XHR.onreadystatechange = function(){
+        if(XHR.readyState == 4){
+            //console.log(XHR.responseText)
+            //判断状态码
+            if(XHR.status>=200 && XHR.status<300 || XHR.status == 304){
+                console.log(XHR.responseText)
+                //解析字符串
+                //var obj = eval('('+XHR.responseText+')');
+            }else{
+                console.log(XHR.status);
+            }
+        }   
+    }
+}
+    // console.log(XHR.readyState)
+    </script>
+</body>
+</html>
