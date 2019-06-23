@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jquery_post</title>
+</head>
+<body>
+    用户:<input type="text" id="user">
+    密码:<input type="text" id="pass">
+    <input type="button" value="提交" id="btn">
+    <button>click</button>
+    <script src="./jquery-3.3.1.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $("#btn").click(function(){  
+            var user = $("#user").val(),
+                pass = $("#pass").val();
+                console.log(user,pass)
+            $.ajax({
+                type: 'get',
+                url: 'http://localhost/index.php',
+                data: {
+                    name: user,
+                    pass: pass
+                },
+                headers:{
+                    'Content-type':'application/x-www-form-urlencoded'
+                },
+                success: function(res){
+                    console.log(res);
+                },
+                error: function(err){
+                    console.log(err)
+                }
+            })
+        }) 
+     })
+    </script>
+</body>
+</html>
